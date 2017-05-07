@@ -14,17 +14,18 @@
 #include <math.h>
 #include <ctime>
 
+#define w 1080
+
 using namespace cv;
 using namespace std;
 
-#define w 1080
 float magnify = 300; 
 float rotation = 0; 
 float radius = 0; 
 
-void simpleLine(Mat img, Point start, Point end);
+void simpleLine( Mat img, Point start, Point end );
 
-int main(void){
+int main( void ){
     
     // set random seed
     srand(time(NULL));
@@ -32,7 +33,7 @@ int main(void){
     
     // create image
     Mat circle = Mat::zeros( w, w, CV_8UC3);
-    circle = Scalar(255,255,255);
+    circle = cv::Scalar(255,255,255);
 
     // create point
     Point lastPoint;
@@ -68,23 +69,23 @@ int main(void){
     }
     
     // determine compression on the png
-    vector<int> compression_params;
+    std::vector<int> compression_params;
     compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
     compression_params.push_back(9);
 
     // save the image to the current folder
     try {
-        ostringstream a;
+        std::ostringstream a;
         a << "output.png";
-        string filepath(a.str());
+        std::string filepath(a.str());
 
         // write image
         imwrite(filepath, circle, compression_params);
         
         // note export
-        cout << "Exported!" << endl;
+        cout << "elements=" << elements << ", amp=" << amp << ", amp2=" << amp2 << endl;
     }
-    catch (runtime_error& ex) {
+    catch (std::runtime_error& ex) {
         fprintf(stderr, "Exception converting image to PNG format: %s\n", ex.what());
         return 1;
     }
@@ -94,6 +95,8 @@ int main(void){
 
 void simpleLine( Mat img, Point start, Point end )
 {
-    line(img, start, end, Scalar(0,0,0), 1, CV_AA);
+    int thickness = 1;
+    int lineType = CV_AA;
+    line(img, start, end, Scalar(0,0,0), thickness, lineType);
 }
 

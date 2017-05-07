@@ -36,7 +36,7 @@
     $requestMethod = 'POST';
     $postfields = array(
         'media_ids' => $mediaid,
-        'status' => '' );
+        'status' => $argv[1] );
 
     // post the tweet!
     $twitter->buildOauth($url, $requestMethod)
