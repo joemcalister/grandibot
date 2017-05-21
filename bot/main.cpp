@@ -46,7 +46,7 @@ int main( void ){
     // determie spacing
     float spacing = 6.2831855/elements;
     
-    for (int i = 0; i < elements;i++) {
+    for (int i = 0; i <= elements;i++) {
         
         // create our point
         Point tP;
